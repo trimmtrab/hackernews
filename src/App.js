@@ -106,7 +106,7 @@ const Table = ({ list, pattern, onDismiss }) => {
 
   return (
     <div className="table">
-      {list.map(item =>
+      {list.filter(item => item.title.toLowerCase().includes(pattern.toLowerCase())).map(item =>
         <div key={item.objectID} className="table-row">
           <span style={largeColumn}>
             <a href={item.url}>{item.title}</a>
