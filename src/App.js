@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import { resolve } from 'q';
 
 const DEFAULT_QUERY = 'Redux';
 
@@ -68,11 +67,12 @@ class App extends Component {
             Search
           </Search>
         </div>
-        <Table 
-          list={result.hits}
-          pattern={searchTerm}
-          onDismiss={this.onDismiss}
-        />
+        { result &&
+          <Table 
+            list={result.hits}
+            pattern={searchTerm}
+            onDismiss={this.onDismiss} />
+        }
       </div>
     );
   }
