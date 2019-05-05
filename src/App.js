@@ -163,6 +163,13 @@ const Search = ({ value, onChange, onSubmit, children }) => (
   </form>
 );
 
+Search.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  children: PropTypes.node,
+}
+
 const Table = ({ list, onDismiss }) => {
   const largeColumn = {
     width: '40%',
