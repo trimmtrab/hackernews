@@ -21,14 +21,14 @@ class App extends Component {
       // updates only when search form is submitted
       searchKey: '',
       // updates according to current input value
-      searchTerm: DEFAULT_QUERY ,
+      searchTerm: DEFAULT_QUERY,
       // indicates error during fetch
       error: null,
     };
 
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
-    this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this); 
+    this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
@@ -60,7 +60,7 @@ class App extends Component {
     });
   }
 
-  fetchSearchTopStories(searchTerm, page=0) {
+  fetchSearchTopStories(searchTerm, page = 0) {
     axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(result => this.setSearchTopStories(result))
       .catch(error => this.setState({ error }));
@@ -69,11 +69,12 @@ class App extends Component {
   componentDidMount() {
     const { searchTerm } = this.state;
     this.setState({ searchKey: searchTerm });
-    this.fetchSearchTopStories(searchTerm); 
+    this.fetchSearchTopStories(searchTerm);
   }
 
   onSearchChange(event) {
-    this.setState({ searchTerm: event.target.value });  }
+    this.setState({ searchTerm: event.target.value });
+  }
 
   onSearchSubmit(event) {
     const { searchTerm } = this.state;
@@ -92,7 +93,7 @@ class App extends Component {
 
     const isNotId = item => item.objectID !== id;
     const updatedHits = hits.filter(isNotId);
-    
+
     this.setState({
       results: {
         ...results,
@@ -102,16 +103,16 @@ class App extends Component {
   }
 
   render() {
-    const { 
-      searchTerm, 
-      results, 
+    const {
+      searchTerm,
+      results,
       searchKey,
       error
     } = this.state;
 
     const page = (
-      results && 
-      results[searchKey] && 
+      results &&
+      results[searchKey] &&
       results[searchKey].page
     ) || 0;
 
@@ -134,13 +135,13 @@ class App extends Component {
           >
             Search
           </Search>
-        </div>        
+        </div>
         <div className="content">
-          { error 
+          {error
             ? <p>Something went wrong ¯\_(ツ)_/¯</p>
-            : <Table 
-                list={list}
-                onDismiss={this.onDismiss} />
+            : <Table
+              list={list}
+              onDismiss={this.onDismiss} />
           }
         </div>
       </div>
@@ -148,12 +149,12 @@ class App extends Component {
   }
 }
 
-const Search = ({ value, onChange, onSubmit, children }) => (  
+const Search = ({ value, onChange, onSubmit, children }) => (
   <form onSubmit={onSubmit} className="search">
     <input
       type="text"
       value={value}
-      onChange={onChange} 
+      onChange={onChange}
     />
     <button type="submit">
       {children}
