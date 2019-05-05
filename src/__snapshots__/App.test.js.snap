@@ -55,7 +55,9 @@ exports[`Search has a valid snapshot 1`] = `
   className="search"
 >
   <input
+    onChange={[Function]}
     type="text"
+    value="Redux"
   />
   <button
     type="submit"
