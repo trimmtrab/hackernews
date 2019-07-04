@@ -1,11 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Button from '../Button';
 
 import './styles.css';
 
-const Table = ({ list, onDismiss }) => {
+type Props = {
+  list: {
+    author?: string,
+    num_comments?: number,
+    objectID: string,
+    points?: number,
+    title?: string,
+    url?: string,
+  }[],
+  onDismiss: (id: any) => void,
+};
+
+const Table = ({ 
+  list, 
+  onDismiss 
+}: Props) => {
   const largeColumn = {
     width: '40%',
   };
@@ -36,8 +50,8 @@ const Table = ({ list, onDismiss }) => {
           </span>
           <span style={smallColumn}>
             <Button
-              onClick={() => onDismiss(item.objectID)}
               className="button-inline"
+              onClick={() => onDismiss(item.objectID)}
             >
               Dismiss
             </Button>
@@ -46,19 +60,6 @@ const Table = ({ list, onDismiss }) => {
       )}
     </div>
   );
-}
-
-Table.propTypes = {
-  list: PropTypes.arrayOf(
-    PropTypes.shape({
-      objectID: PropTypes.string.isRequired,
-      author: PropTypes.string,
-      url: PropTypes.string,
-      num_comments: PropTypes.number,
-      points: PropTypes.number,
-    })
-  ).isRequired,
-  onDismiss: PropTypes.func.isRequired,
 }
 
 export default Table;
