@@ -35,8 +35,6 @@ describe('Search', () => {
 
   const props = {
     value: 'Redux',
-    onChange: () => {},
-    onDismiss: () => {},
   }
 
   it('renders without crashing', () => {

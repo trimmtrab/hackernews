@@ -53,6 +53,7 @@ exports[`Button has a valid snapshot 1`] = `
 exports[`Search has a valid snapshot 1`] = `
 <form
   className="search"
+  onSubmit={[Function]}
 >
   <input
     onChange={[Function]}

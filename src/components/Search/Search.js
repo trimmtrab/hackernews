@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 
 import './styles.css'
 
-const Search = ({ value, onChange, onSubmit, children }) => (
+const Search = ({ 
+  children,
+  onChange, 
+  onSubmit, 
+  value,
+}) => (
   <form onSubmit={onSubmit} className="search">
     <input
       type="text"
@@ -16,10 +21,15 @@ const Search = ({ value, onChange, onSubmit, children }) => (
   </form>
 );
 
+Search.defaultProps = {
+  onChange: () => {},
+  onSubmit: () => {},
+}
+
 Search.propTypes = {
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
+  onSubmit: PropTypes.func,
   children: PropTypes.node,
 }
 
