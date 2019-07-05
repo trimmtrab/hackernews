@@ -29,6 +29,7 @@ class App extends Component {
       searchTerm: DEFAULT_QUERY,
       // indicates error during fetch
       error: null,
+      fetchingStories: false,
     };
   }
 
@@ -39,9 +40,11 @@ class App extends Component {
   }
 
   fetchSearchTopStories = (searchTerm, page = 0) => {
+    this.setState({ fetchingStories: true });
     axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(result => this.setSearchTopStories(result))
-      .catch(error => this.setState({ error }));
+      .catch(error => this.setState({ error }))
+      .then(() => { this.setState({ fetchingStories: false })});
   }
 
   // client makes a request to the API only once
@@ -105,7 +108,8 @@ class App extends Component {
       searchTerm,
       results,
       searchKey,
-      error
+      error,
+      fetchingStories,
     } = this.state;
 
     const page = (
@@ -123,7 +127,10 @@ class App extends Component {
     return (
       <div className="page">
         <div className="interactions">
-          <Button onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
+          <Button 
+            onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}
+            showSpinner={fetchingStories}
+          >
             More
           </Button>
           <Search

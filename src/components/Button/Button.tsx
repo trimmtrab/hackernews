@@ -6,12 +6,14 @@ type Props = {
   children?: JSX.Element | JSX.Element[] | string,
   className?: string,
   onClick: () => void,
+  showSpinner?: boolean,
 };
 
 const Button = ({
   children,
   className, 
-  onClick = () => {}, 
+  onClick = () => {},
+  showSpinner = false,
 }: Props) => {
   return (
     <button
@@ -19,7 +21,11 @@ const Button = ({
       onClick={onClick}
       type="button"
     >
-      {children}
+      {
+        showSpinner ?
+        '...': // TODO: make it actual spinner
+        children
+      }
     </button>
   );
 }
