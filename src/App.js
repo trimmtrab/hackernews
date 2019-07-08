@@ -17,7 +17,6 @@ const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
 
 class App extends Component {
-
   constructor(props) {
     super(props);
 
@@ -44,13 +43,11 @@ class App extends Component {
     axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(result => this.setSearchTopStories(result))
       .catch(error => this.setState({ error }))
-      .then(() => { this.setState({ fetchingStories: false })});
+      .then(() => { this.setState({ fetchingStories: false }); });
   }
 
   // client makes a request to the API only once
-  needsToSearchTopStories = (searchTerm) => {
-    return !this.state.results[searchTerm];
-  }
+  needsToSearchTopStories = searchTerm => !this.state.results[searchTerm]; // eslint-disable-line
 
   onDismiss = (id) => {
     const { searchKey, results } = this.state;
@@ -92,14 +89,14 @@ class App extends Component {
 
     const updatedHits = [
       ...oldHits,
-      ...hits
+      ...hits,
     ];
 
     this.setState({
       results: {
         ...results,
-        [searchKey]: { hits: updatedHits, page }
-      }
+        [searchKey]: { hits: updatedHits, page },
+      },
     });
   }
 
@@ -113,21 +110,21 @@ class App extends Component {
     } = this.state;
 
     const page = (
-      results &&
-      results[searchKey] &&
-      results[searchKey].page
+      results
+      && results[searchKey]
+      && results[searchKey].page
     ) || 0;
 
     const list = (
-      results &&
-      results[searchKey] &&
-      results[searchKey].hits
+      results
+      && results[searchKey]
+      && results[searchKey].hits
     ) || [];
 
     return (
       <div className="page">
         <div className="interactions">
-          <Button 
+          <Button
             onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}
             showSpinner={fetchingStories}
           >
@@ -144,9 +141,7 @@ class App extends Component {
         <div className="content">
           {error
             ? <p>Something went wrong ¯\_(ツ)_/¯</p>
-            : <Table
-              list={list}
-              onDismiss={this.onDismiss} />
+            : <Table list={list} onDismiss={this.onDismiss} />
           }
         </div>
       </div>
